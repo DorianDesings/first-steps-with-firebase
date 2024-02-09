@@ -1,13 +1,10 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { auth } from '../../config/firebase.config';
-import { AuthContext } from '../../contexts/Auth.context';
+import withAuth from '../../hocs/withAuth';
 
 const Register = () => {
-	const { loading, currentUser } = useContext(AuthContext);
 	const [registerData, setRegisterData] = useState({});
-
-	if (loading || currentUser) return;
 
 	return (
 		<>
@@ -55,4 +52,4 @@ const registerUser = async (event, registerData) => {
 	}
 };
 
-export default Register;
+export default withAuth(Register, { isAuth: false });

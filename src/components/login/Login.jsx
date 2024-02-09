@@ -1,13 +1,11 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { auth } from '../../config/firebase.config';
-import { AuthContext } from '../../contexts/Auth.context';
+import withAuth from '../../hocs/withAuth';
 
 const Login = () => {
-	const { loading, currentUser } = useContext(AuthContext);
 	const [loginData, setLoginData] = useState({});
 
-	if (loading || currentUser) return;
 	return (
 		<>
 			<h2>Login</h2>
@@ -54,4 +52,4 @@ const loginUser = async (event, loginData) => {
 	}
 };
 
-export default Login;
+export default withAuth(Login, { isAuth: false });

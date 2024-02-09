@@ -1,13 +1,10 @@
 import { signOut } from 'firebase/auth';
-import { useContext } from 'react';
+
 import { auth } from '../../config/firebase.config';
-import { AuthContext } from '../../contexts/Auth.context';
+
+import withAuth from '../../hocs/withAuth';
 
 const Logout = () => {
-	const { currentUser } = useContext(AuthContext);
-
-	if (!currentUser) return;
-
 	return <button onClick={logout}>Logout</button>;
 };
 
@@ -15,4 +12,4 @@ const logout = async () => {
 	await signOut(auth);
 };
 
-export default Logout;
+export default withAuth(Logout, { isAuth: true });
